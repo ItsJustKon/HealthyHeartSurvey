@@ -9,7 +9,20 @@
 <h1>
     <input id="name" placeholder="Name">
     <br>
-    <input id="age" placeholder="Age">
+    <input id="age" placeholder="Age (Must be 18+)" type="number">
+    <br>
+    <select id="gender">
+        <option value="" disabled selected>Select your gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    <br>
+    <select id="race">
+        <option value="" disabled selected>Select your race</option>
+        <option value="white">White</option>
+        <option value="black">Black</option>
+        <option value="Hispanic">hispanic</option>
+    </select>
     <br>
     <select id="state">
         <option value="" disabled selected>Select your state</option>
@@ -66,10 +79,16 @@
         <option value="WY">Wyoming</option>
          
     </select>
+    <br>
+    <button onclick="infosubmit()">Submit</button>
 </h1>
 
 
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script type="text/javascript" src="heartdata.json"></script>
+<script src="main.js"></script>
+
 </html>
