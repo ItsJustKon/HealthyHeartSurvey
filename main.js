@@ -1,5 +1,6 @@
-// please convert the csv to json to be able to modify things easier
-// use jQuery library to fetch "heartdata.json" and use that json to calculateprobs 
+// tbh you can just set up a sever or whatever you did kinda like what you did with leostats
+// and just convert the csv to json and store it please Kingston
+
 function infosubmit()
 {
  
@@ -9,6 +10,7 @@ function infosubmit()
     var gender = document.getElementById("gender").value
     var state = document.getElementById("state")
     var indicator = document.getElementById("indicator").value
+    console.log(`your name is ${name}`)
     calculateprobs(age, race, gender, state, indicator)
 }
 
