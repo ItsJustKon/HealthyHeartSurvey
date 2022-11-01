@@ -6,9 +6,13 @@
 <p style="color: white">SciFair Project Start</p>
 <!-- Questions to ask the user -->
 <!-- Name, State , Age, Gender, Race, Indicator/Possible Risk Factors -->
-<h1>
+<h1 id="currentquestion">
     <input id="name" placeholder="Name">
-    <br>
+   
+   
+</h1>
+<button onclick="nextquestion()">Next Question</button>
+<div id = objects style="display: none">
     <input id="age" placeholder="Age (Must be 18+)" type="number">
     <br>
     <select id="gender">
@@ -80,13 +84,11 @@
          
     </select>
     <br>
-    <button onclick="infosubmit()">Submit</button>
-</h1>
-
+</div>
 
 
 
 </body>
-<script src="main.js"></script>
+<script src="scripts\main.js"></script>
 
 </html>
