@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <style>
+        h1 {color: white;}
+        h2 {color: white;}
+        p {color: white;}
+
+    </style>
+</head>
+
 <body style="background-color: #181a1b">
 
-    <h2 style="color: white">Healthy Heart Survey</h2>
-    <p style="color: white">Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
-    <!-- Questions to ask the user -->
-    <!-- Name, State , Age, Gender, Race, Indicator/Possible Risk Factors -->
+
+    <h2>Healthy Heart Survey</h2>
+    <p>Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
+    <p>Your data is not being stored or collected. Examine our code at https://github.com/ItsJustKon/HealthyHeartSurvey.</p>
+    
+    <!-- This div holds the question currently displayed. -->
     <div id="currentQuestion"></div>
 
     <div id="buttons">
-        <button onclick="backQuestion()" id="backButton" style="margin-right:50px">Previous Question</button>
-        <button onclick="nextQuestion()" id="nextButton" style="margin-left:50px">Next Question</button>
+        <button onclick="backQuestion(); return false;" id="backButton" style="margin-right:50px">Previous
+            Question</button>
+        <button onclick="nextQuestion(); return false;" id="nextButton" style="margin-left:50px">Next Question</button>
     </div>
 
     <!-- Div to hold the questions we will use, never displayed. -->
@@ -19,7 +31,7 @@
         <div id="age">
             <input placeholder="Age" type="number">
         </div>
-        
+
         <div id="gender">
             <select>
                 <option value="" disabled selected>Select your Sex</option>
@@ -29,11 +41,12 @@
             </select>
         </div>
 
+        <!-- Add more races according to the CSV -->
         <select id="race">
             <option value="" disabled selected>Select your Race</option>
-            <option value="Caucasian">White</option>
-            <option value="African-American">Black</option>
-            <option value="Hispanic">hispanic</option>
+            <option value="Caucasian">Caucasian</option>
+            <option value="African-American">African-American</option>
+            <option value="Hispanic">Hispanic</option>
         </select>
 
         <div id="height">
@@ -53,7 +66,6 @@
             <option value="CO">Colorado</option>
             <option value="CT">Connecticut</option>
             <option value="DE">Delaware</option>
-            <option value="DC">District Of Columbia</option>
             <option value="FL">Florida</option>
             <option value="GA">Georgia</option>
             <option value="HI">Hawaii</option>
@@ -98,6 +110,42 @@
             <option value="WY">Wyoming</option>
 
         </select>
+
+        <div id="diabetes">
+            <p>Have you been diagnosed with Diabetes?</p>
+            <select placeholder="~">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+        </div>
+
+        <div id="smoking">
+            <p>Have you smoked
+                1. Over 100 cigarettes in your lifetime, or
+                2. Over 10 cigarettes in the past month?
+            </p>
+            <select placeholder="~">
+                <option value="No">Yes</option>
+                <option value="Yes">Yes</option>
+            </select>
+        </div>
+
+        <div id="cholesterol">
+            <p>Do you have untreated high cholesterol?</p>
+            <select placeholder="~">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+        </div>
+
+        <div id="excercise">
+            <p>Do you excercise intentionally for over 30 minutes a day?</p>
+            <select placeholder="~">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+        </div>
+
 
     </div>
 
