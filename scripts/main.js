@@ -1,52 +1,52 @@
 // tbh you can just set up a sever or whatever you did kinda like what you did with leostats
 // and just convert the csv to json and store it please Kingston
-var namediv = document.getElementById("name")
-var agediv = document.getElementById("age")
-var racediv = document.getElementById("race")
-var genderdiv = document.getElementById("gender")
-var statediv = document.getElementById("state")
-var indicatordiv = document.getElementById("indicator")
-var obejectsarray = [namediv, agediv, racediv, genderdiv, statediv, indicatordiv]
-var questionsdiv = document.getElementById("currentquestion")
-var index = 1
-var backbutton = document.createElement("button")
-backbutton.style.display = "none"
-function infosubmit()
-{
- 
-    var name = document.getElementById("name").value
-    var age = document.getElementById("age").value
-    var race = document.getElementById("race").value
-    var gender = document.getElementById("gender").value
-    var state = document.getElementById("state")
-    var indicator = document.getElementById("indicator").value
-    console.log(`your name is ${name}`)
-    calculateprobs(age, race, gender, state, indicator)
-}
+let namediv = document.getElementById("name");
+let agediv = document.getElementById("age");
+let racediv = document.getElementById("race");
+let genderdiv = document.getElementById("gender");
+let statediv = document.getElementById("state");
+let indicatordiv = document.getElementById("indicator");
+let questionsdiv = document.getElementById("currentquestion");
+let backbutton = document.createElement("backButton");
+let nextButton = document.getElementById("nextButton");
+let obejectsarray = [namediv, agediv, racediv, genderdiv, statediv, indicatordiv];
+let index = 1;
 
-function nextquestion()
-{
-    index = index + 1
-    if(backbutton.style.display == "none")
-    {
-        console.log("TRUE")
-        if(index >= 2)
-        {
-            backbutton.style.display = ""
+backbutton.style.display = "none";
+function infosubmit() {
+
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let race = document.getElementById("race").value;
+    let gender = document.getElementById("gender").value;
+    let state = document.getElementById("state")
+    let indicator = document.getElementById("indicator").value;
+    console.log(`your name is ${name}`);
+    calculateprobs(age, race, gender, state, indicator);
+};
+
+function nextquestion() {
+    index = index + 1;
+    //I'm assuming that we have 12 questions.
+    if (index === 12) {
+
+    }
+
+    if (backbutton.style.display == "none") {
+        console.log("TRUE");
+        if (index >= 2) {
+            backbutton.style.display = "";
         }
     }
 
-    console.log(backbutton.style.display)
-}
+    console.log(backbutton.style.display);
+};
 
-function backquestion()
-{
-    index = index - 1
+function backquestion() {
+    index = index - 1;
+};
 
-}
-
-function calculateprobs(age, race, gender, state, indicator)
-{
+function calculateprobs(age, race, gender, state, indicator) {
     // probibilty of getting heart diease or whatever = a whole lotta math or something like that y'know
-    return probibilty
-}
+    return probibilty;
+};
