@@ -3,12 +3,12 @@
 let name = document.getElementById("name");
 let indicator = document.getElementById("indicator");
 let questions = document.getElementById("currentQuestion");
-let backbutton = document.getElementById("backButton");
+let backButton = document.getElementById("backButton");
 let nextButton = document.getElementById("nextButton");
-let questionsList = ["age", "gender", "race", "height", "weight", "state"];
+let questionsList = ["age", "gender", "race", "height", "weight", "state", "diabetes", "smoking", "cholesterol", "excercise"];
 let index = -1;
 
-//backbutton.style.display = "none";
+backButton.style.opacity = 0;
 
 function backQuestion() {
 
@@ -17,13 +17,18 @@ function backQuestion() {
         questions.innerHTML = "";
 
         questions.appendChild(document.getElementById(questionsList[index]).cloneNode(true));
+
+        if (index === 0) {
+            backButton.style.opacity = 0;
+        }
+
+        nextButton.innerHTML = "Next Question";
     }
 };
 
 function nextQuestion() {
     
-    //Change this number when we add more questions.
-    if (index <= 5) {
+    if (index < (questionsList.length - 1)) {
         index++;
         questions.innerHTML = "";
 
@@ -33,10 +38,11 @@ function nextQuestion() {
         questions.appendChild(document.getElementById(questionsList[index]).cloneNode(true));
         
         //I'm assuming that we will have 12 questions.
-        if (index === 12) {
+        if (index === questionsList.length - 1) {
             nextButton.innerHTML = "Submit";
         }
-
+        
+        backButton.style.opacity = 1;
     }
 };
 
