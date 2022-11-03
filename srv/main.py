@@ -1,6 +1,4 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import resource
-import time
 import cgi
 import csv
 
@@ -12,8 +10,10 @@ with open('../data/heartData.csv', mode='r') as csv_file:
 overall = []
 
 for i in range(len(rows)):
+    #Fetches the first instance of average smoking risk
     if rows[i]['locationabbr'] == "USM" and rows[i]['topic'] == "Smoking" and rows[i]['break_out'] == "Overall":
         overall.append(i)
+        break
 
 print(overall)
 print(rows[0])
@@ -36,10 +36,9 @@ class MyServer(BaseHTTPRequestHandler):
             fp = self.rfile,
             headers = self.headers,
             environ = {"REQUEST_METHOD": "POST"}
-        )
+        )        
         
-        usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-        print(usage)
+        # print(form.getvalue('age'))
 
 
 if __name__ == "__main__":        
