@@ -3,34 +3,46 @@
 
 <body style="background-color: #181a1b">
 
-    <h2 style="color: white">Heart</h2>
-    <p style="color: white">SciFair Project Start</p>
+    <h2 style="color: white">Healthy Heart Survey</h2>
+    <p style="color: white">Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
     <!-- Questions to ask the user -->
     <!-- Name, State , Age, Gender, Race, Indicator/Possible Risk Factors -->
-    <div id="questionField">
-        <h1 id="currentquestion">
-            <input id="name" placeholder="Name">
+    <div id="currentQuestion"></div>
 
-
-        </h1>
+    <div id="buttons">
+        <button onclick="backQuestion()" id="backButton" style="margin-right:50px">Previous Question</button>
+        <button onclick="nextQuestion()" id="nextButton" style="margin-left:50px">Next Question</button>
     </div>
-    <button onclick="nextquestion()" id="nextButton">Next Question</button>
-    <div id=objects style="display: none">
-        <input id="age" placeholder="Age (Must be 18+)" type="number">
-        <br>
-        <select id="gender">
-            <option value="" disabled selected>Select your gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <br>
+
+    <!-- Div to hold the questions we will use, never displayed. -->
+    <div id="questions" style="display: none">
+        <div id="age">
+            <input placeholder="Age" type="number">
+        </div>
+        
+        <div id="gender">
+            <select>
+                <option value="" disabled selected>Select your Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Female">Other/Prefer not to answer</option>
+            </select>
+        </div>
+
         <select id="race">
-            <option value="" disabled selected>Select your race</option>
-            <option value="white">White</option>
-            <option value="black">Black</option>
+            <option value="" disabled selected>Select your Race</option>
+            <option value="Caucasian">White</option>
+            <option value="African-American">Black</option>
             <option value="Hispanic">hispanic</option>
         </select>
-        <br>
+
+        <div id="height">
+            <input id="feet" placeholder="Ft" type="number" style="width:25px; margin-right: 10px">
+            <input id="inches" placeholder="In" type="number" style="width:25px; margin-left:10px">
+        </div>
+
+        <input id="weight" placeholder="Weight (Lbs.)" type="number">
+
         <select id="state">
             <option value="" disabled selected>Select your state</option>
             <option value="AL">Alabama</option>
@@ -86,7 +98,7 @@
             <option value="WY">Wyoming</option>
 
         </select>
-        <br>
+
     </div>
 
 
