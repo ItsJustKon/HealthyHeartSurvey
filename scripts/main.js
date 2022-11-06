@@ -7,16 +7,26 @@ let index = -1;
 
 backButton.style.opacity = 0;
 
+function getValue(index) {
+    let value;
+    let element= document.getElementById(questionsList[index]);
+
+    // if () 
+    // {}
+
+
+    return value;
+}
+
 function backQuestion() {
 
     if (index > 0) {
-        let current = questionsList[index];
-        
-        answers.current = document.getElementById(current);
-        console.log(answers.current);
-        
         index--;
         questions.innerHTML = "";
+        
+        let current = questionsList[index];
+        answers.current = document.getElementById(current);
+        
 
         questions.appendChild(document.getElementById(current).cloneNode(true));
 
@@ -36,9 +46,7 @@ function nextQuestion() {
             let current = questionsList[index];
             
             answers.current = document.getElementById(current).value;
-            console.log(answers.current);
     
-            index++;
             questions.innerHTML = "";
         }
         catch (e) { console.log(e); }
