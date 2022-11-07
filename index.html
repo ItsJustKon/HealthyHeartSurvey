@@ -3,10 +3,17 @@
 
 <head>
     <style>
-        h1 {color: white;}
-        h2 {color: white;}
-        p {color: white;}
+        h1 {
+            color: white;
+        }
 
+        h2 {
+            color: white;
+        }
+
+        p {
+            color: white;
+        }
     </style>
 </head>
 
@@ -16,30 +23,26 @@
     <h2>Healthy Heart Survey</h2>
     <p>Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
     <p>Your data is not being stored or collected. Examine our code at https://github.com/ItsJustKon/HealthyHeartSurvey.</p>
-    
+
     <!-- This div holds the question currently displayed. -->
     <div id="currentQuestion"></div>
 
     <div id="buttons">
-        <button onclick="backQuestion();" id="backButton" style="margin-right:50px">Previous
-            Question</button>
+        <button onclick="backQuestion();" id="backButton" style="margin-right:50px">Previous Question</button>
         <button onclick="nextQuestion();" id="nextButton" style="margin-left:50px">Next Question</button>
     </div>
 
     <!-- Div to hold the questions we will use, never displayed. -->
     <div id="questions" style="display: none">
-        <div id="age">
-            <input placeholder="Age" type="number">
-        </div>
 
-        <div id="gender">
-            <select>
-                <option value="" disabled selected>Select your Sex</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Female">Other/Prefer not to answer</option>
-            </select>
-        </div>
+        <input id="age" placeholder="Age" type="number">
+
+        <select id="gender">
+            <option value="" disabled selected>Select your Sex</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Female">Other/Prefer not to answer</option>
+        </select>
 
         <!-- Add more races according to the CSV -->
         <select id="race">
@@ -49,10 +52,8 @@
             <option value="Hispanic">Hispanic</option>
         </select>
 
-        <div id="height">
-            <input id="feet" placeholder="Ft" type="number" style="width:25px; margin-right: 10px">
-            <input id="inches" placeholder="In" type="number" style="width:25px; margin-left:10px">
-        </div>
+        <input id="feet" placeholder="Ft" type="number" style="width:25px; margin-right: 10px">
+        <input id="inches" placeholder="In" type="number" style="width:25px; margin-left:10px">
 
         <input id="weight" placeholder="Weight (Lbs.)" type="number">
 
@@ -108,47 +109,29 @@
             <option value="WV">West Virginia</option>
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
-
         </select>
 
-        <div id="diabetes">
-            <p>Have you been diagnosed with Diabetes?</p>
-            <select placeholder="~">
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-        </div>
+        <select id="diabetes" placeholder="~">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
 
-        <div id="smoking">
-            <p>Have you smoked
-                1. Over 100 cigarettes in your lifetime, or
-                2. Over 10 cigarettes in the past month?
-            </p>
-            <select placeholder="~">
-                <option value="No">Yes</option>
-                <option value="Yes">Yes</option>
-            </select>
-        </div>
+        <select id="smoking" placeholder="~">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
 
-        <div id="cholesterol">
-            <p>Do you have untreated high cholesterol?</p>
-            <select placeholder="~">
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-        </div>
+        <select id="cholesterol" placeholder="~">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
 
-        <div id="excercise">
-            <p>Do you excercise intentionally for over 30 minutes a day?</p>
-            <select placeholder="~">
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
-        </div>
-
-
+        <p>Do you excercise intentionally for over 30 minutes a day?</p>
+        <select id="excercise" placeholder="~">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
     </div>
-
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="scripts\main.js"></script>
