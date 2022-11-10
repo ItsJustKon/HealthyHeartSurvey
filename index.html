@@ -25,6 +25,7 @@
     <p>Your data is not being stored or collected. Examine our code at https://github.com/ItsJustKon/HealthyHeartSurvey.</p>
 
     <!-- This div holds the question currently displayed. -->
+    <div id="currentLabel"></div>
     <div id="currentQuestion"></div>
 
     <div id="buttons">
@@ -51,9 +52,11 @@
             <option value="African-American">African-American</option>
             <option value="Hispanic">Hispanic</option>
         </select>
-
-        <input id="feet" placeholder="Ft" type="number" style="width:25px; margin-right: 10px">
-        <input id="inches" placeholder="In" type="number" style="width:25px; margin-left:10px">
+        <div id="height">
+            <input id="feet" placeholder="Ft" type="number" style="width:25px; margin-right: 10px">
+            <input id="inches" placeholder="In" type="number" style="width:25px; margin-left:10px">
+        </div>
+        
 
         <input id="weight" placeholder="Weight (Lbs.)" type="number">
 
@@ -126,11 +129,24 @@
             <option value="Yes">Yes</option>
         </select>
 
-        <p>Do you excercise intentionally for over 30 minutes a day?</p>
         <select id="excercise" placeholder="~">
             <option value="No">No</option>
             <option value="Yes">Yes</option>
         </select>
+    </div>
+    <div id="labelsList" style="display: none">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p>Height</p>
+        <p></p>
+        <p></p>
+        <p>diabetes</p>
+        <p>smoking</p>
+        <p>cholesterol</p>
+        <p>Do you excercise intentionally for over 30 minutes a day?</p>
+
+
     </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
