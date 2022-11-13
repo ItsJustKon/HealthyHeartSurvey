@@ -82,22 +82,44 @@ async function infoSubmit() {
     console.log(answers);
 
     //Send a POST request to localhost://8080 with all of the answers included as a form.
-    let res = await axios.post("http://localhost:8080", {
-        age: answers.age,
-        gender: answers.gender,
-        race: answers.race,
-        heightFt: answers.heightFt,
-        heightIn: answers.heightIn,
-        weight: answers.weight,
-        state: answers.state,
-        diabetes: answers.diabetes,
-        smoking: answers.smoking,
-        cholesterol: answers.cholesterol,
-        excercise: answers.excercise
-    })
-    .then(function (res) {console.log(res.data);})
-    .catch(function (err) {console.log(err);});
-
+    // let res = await axios.post("http://localhost:8080", {
+    //     age: answers.age,
+    //     gender: answers.gender,
+    //     race: answers.race,
+    //     heightFt: answers.heightFt,
+    //     heightIn: answers.heightIn,
+    //     weight: answers.weight,
+    //     state: answers.state,
+    //     diabetes: answers.diabetes,
+    //     smoking: answers.smoking,
+    //     cholesterol: answers.cholesterol,
+    //     excercise: answers.excercise
+    // })
+    // .then(function (res) {console.log(res.data);})
+    // .catch(function (err) {console.log(err);});
+    const response = await fetch("http://localhost:8080", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: `{
+        "age": "${answers.age}",
+        "gender": "${answers.gender}",
+        "race": "${answers.race}",
+        "heightFt": "${answers.heightFt}",
+        "heightIn": "${answers.heightIn}",
+        "weight": "${answers.weight}",
+        "state": "${answers.state}",
+        "diabetes": "${answers.diabetes}",
+        "smoking": "${answers.smoking}",
+        "cholesterol": "${answers.cholesterol}"
+        
+          }`,
+        }).then((response) => response.text())
+        .then((data) => console.log(data));;
+        // excercise: ${answers.excercise};
+    
 
 };
 

@@ -1,10 +1,11 @@
 import cgi
 import csv
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
 
 count = 0
 
-with open('../data/heartData.csv', mode='r') as csv_file:
+with open('data\heartData.csv', mode='r') as csv_file:
     csv_reader = csv.DictReader(csv_file)
     rows = list(csv_reader)
     
@@ -43,16 +44,24 @@ class MyServer(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS, POST')
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
-        
-        form = cgi.FieldStorage(
-            fp=self.rfile,
-            headers=self.headers,
-            environ={'REQUEST_METHOD':'POST'} )
-        
-        print(form)
+        print("Request")
+        # give these better names if you want
+        body = self.rfile.read(int(self.headers.get('Content-Length')))
+        decode = body.decode('utf8').replace("\n", '')
+        jsondata = json.loads(decode)
+        var = jsondata["age"]#use this to get values from json
+        calulations()
+        print(f"parsed json?{jsondata}")
+        print(f"Age: {var}")
+        response = bytes("I DID IT :) Put the percentages and stuff here kingston i think", "utf-8") #create response
+        self.wfile.write(response)
 
 hostName = "localhost"
 serverPort = 8080
+
+def calulations():
+    ...
+
 
 if __name__ == "__main__":        
     webServer = HTTPServer((hostName, serverPort), MyServer)
