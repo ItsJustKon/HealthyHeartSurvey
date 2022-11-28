@@ -4,18 +4,16 @@ let labelsList = document.getElementById("labelsList")
 let backButton = document.getElementById("backButton");
 let nextButton = document.getElementById("nextButton");
 let questionsList = document.getElementById("questions")
-let answers = {age: "", gender: "", race: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: ""};
+let answers = { age: "", gender: "", race: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
 let index = -1;
 
 function storeValue(index) {
     if (index != -1) {
-        if (index === 3)
-        {
+        if (index === 3) {
             answers["heightFt"] = `Feet:${document.getElementById("feet").value}`
             answers["heightIn"] = `${document.getElementById("inches").value}`
         }
-        else
-        {
+        else {
             answers[questionsList.children[index].id] = document.getElementById(questionsList.children[index].id).value;
         }
     }
@@ -28,7 +26,7 @@ function backQuestion() {
         index--;
         questions.innerHTML = "";
         labels.innerHTML = ""
-        
+
         if (index === 3) {
             questions.appendChild(document.getElementById("feet").cloneNode(true));
             questions.appendChild(document.getElementById("inches").cloneNode(true));
@@ -36,11 +34,10 @@ function backQuestion() {
         else {
             questions.appendChild(questionsList.children[index].cloneNode(true));
         }
-        
+
         labels.appendChild(labelsList.children[index].cloneNode(true))
-        
-        if (index === 0) 
-        { backButton.style.opacity = 0; }
+
+        if (index === 0) { backButton.style.opacity = 0; }
 
         nextButton.innerHTML = "Next Question";
         nextButton.removeEventListener('click', infoSubmit)
@@ -50,11 +47,11 @@ function backQuestion() {
 function nextQuestion() {
     if (index < (questionsList.children.length - 1)) {
         storeValue(index);
-        
+
         index++;
         questions.innerHTML = "";
         labels.innerHTML = ""
-        
+
         //Gets one question from questions list based on the index.
         //This prevents a lot of declarations at the top of the file.
         //We clone the node because if we don't, the element is deleted and cannot be used again.
@@ -66,14 +63,14 @@ function nextQuestion() {
             questions.appendChild(questionsList.children[index].cloneNode(true));
         }
         labels.appendChild(labelsList.children[index].cloneNode(true))
-        
+
         if (index === questionsList.children.length - 1) {
             nextButton.innerHTML = "Submit";
             nextButton.addEventListener('click', infoSubmit)
         }
 
         backButton.style.opacity = 1;
-        
+
     }
 };
 //let answers = {age: "", gender: "", race: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: ""};
@@ -100,8 +97,8 @@ async function infoSubmit() {
     const response = await fetch("http://localhost:8080", {
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: `{
         "age": "${answers.age}",
@@ -115,11 +112,11 @@ async function infoSubmit() {
         "smoking": "${answers.smoking}",
         "cholesterol": "${answers.cholesterol}"
         
-          }`,
-        }).then((response) => response.text())
+        }`,
+    }).then((response) => response.text())
         .then((data) => console.log(data));;
-        // excercise: ${answers.excercise};
-    
+    // excercise: ${answers.excercise};
+
 
 };
 
