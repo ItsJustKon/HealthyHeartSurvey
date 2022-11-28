@@ -6,6 +6,7 @@ let nextButton = document.getElementById("nextButton");
 let questionsList = document.getElementById("questions");
 let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
 let index = -1;
+let risk = 0;
 
 async function recallValues() {
 	//Checks if a question has already been answered;
@@ -58,7 +59,7 @@ function updateQuestion() {
 	//Gets one question from questions list based on the index.
 	//This prevents a lot of declarations at the top of the file.
 	//We clone the node because if we don't, the element is deleted and cannot be used again.
-	if (index === 3) {
+	if (index === 2) {
 		questions.appendChild(document.getElementById("feet").cloneNode(true));
 		questions.appendChild(document.getElementById("inches").cloneNode(true));
 	} else {
@@ -114,17 +115,38 @@ async function infoSubmit() {
 	//Add a point if...
 	//BMI is in an unhealthy range
 	BMI < 18.5 || BMI > 25.9 ? riskVal += onePoint : null;
+	console.log(`Risk Factor post BMI: ${riskVal}`);
 	//They are a regular smoker
-	answers.smoking ? riskVal += onePoint : null;
+	answers.smoking === "Yes" ? riskVal += onePoint : null;
+	console.log(`Risk Factor post Smoking: ${riskVal}`);
 	//They have high cholesterol
-	answers.cholesterol ? riskVal += onePoint : null;
+	answers.cholesterol === "Yes" ? riskVal += onePoint : null;
+	console.log(`Risk Factor post Cholesterol: ${riskVal}`);
 	//They smoke regularly
-	!answers.smoking ? riskVal += onePoint : null;
+	!answers.smoking === "Yes" ? riskVal += onePoint : null;
+	console.log(`Risk Factor post Smoking: ${riskVal}`);
 	//They do not get enough excercise
-	!answers.excercise ? riskVal += onePoint : null;
+	!answers.excercise === "Yes" ? riskVal += onePoint : null;
+	console.log(`Risk Factor post Excercise: ${riskVal}`);
 
 	//Males contract heart disease at a rate rougly 41.5% more than Females.
 	answers.sex === "Male" ? riskVal = riskVal * 1.415 : null;
+	console.log(`Risk Factor post Sex: ${riskVal}`);
+
+	
+	//Add 15% to risk factor for every 20 years of age.
+	let ageRisk = 0;
+	if (answers.age > 20) {
+		while (answers.age > 0) {
+			answers.age -= 20;
+			ageRisk += 0.15;
+		}
+	}
+	console.log(`Age Risk: ${ageRisk}`);
+	riskVal = riskVal * (1 + ageRisk);
+	console.log(`Final Risk Value: ${riskVal}`);
+
+	risk = riskVal;
 }
 
 hideBackButton();
