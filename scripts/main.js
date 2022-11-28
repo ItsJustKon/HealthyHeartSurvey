@@ -8,6 +8,9 @@ let answers = { age: "", gender: "", race: "", heightFt: "", heightIn: "", weigh
 let index = -1;
 
 async function recallValues() {
+	//Checks if a question has already been answered;
+	//If it has, update the answer field to have the saved answer.
+
 	if (Object.values(answers)[index] != "") {
 		questions.childNodes[0].value = Object.values(answers)[index];
 		if (index === 3) {
@@ -75,10 +78,11 @@ function backQuestion() {
 		
 		wipeQuestions();
 		updateQuestion();
-		hideBackButton();
 		recallValues();
 		submitToNext();
-		
+		if (index === 0) {
+			hideBackButton();
+		}
 	}
 }
 
@@ -100,6 +104,15 @@ function nextQuestion() {
 
 async function infoSubmit() {
 	console.log(answers);
+	let riskVal = 0;
+	let onePoint = 11;
+	
+	let height = (answers.heightFt * 12) + answers.heightIn;
+	let BMI = 703 * (answers.weight / (height ^ 2));
+
+	//If BMI is in an unhealthy range
+	BMI < 18.5 || BMI > 25.9 ? riskVal += onePoint : riskVal += 0;
+
 }
 
 hideBackButton();
