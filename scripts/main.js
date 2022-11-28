@@ -4,7 +4,7 @@ let labelsList = document.getElementById("labelsList");
 let backButton = document.getElementById("backButton");
 let nextButton = document.getElementById("nextButton");
 let questionsList = document.getElementById("questions");
-let answers = { age: "", gender: "", race: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
+let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
 let index = -1;
 
 async function recallValues() {
@@ -13,7 +13,7 @@ async function recallValues() {
 
 	if (Object.values(answers)[index] != "") {
 		questions.childNodes[0].value = Object.values(answers)[index];
-		if (index === 3) {
+		if (index === 2) {
 			questions.childNodes[1].value = answers["heightIn"];
 		}
 	}
@@ -29,7 +29,7 @@ async function revealBackButton() {
 
 function storeValue(index) {
 	if (index != -1) {
-		if (index === 3) {
+		if (index === 2) {
 			answers["heightFt"] = `${document.getElementById("feet").value}`;
 			answers["heightIn"] = `${document.getElementById("inches").value}`;
 		}
@@ -105,14 +105,26 @@ function nextQuestion() {
 async function infoSubmit() {
 	console.log(answers);
 	let riskVal = 0;
-	let onePoint = 11;
+	let onePoint = 20;
 	
+	//Formula to calculate BMI
 	let height = (answers.heightFt * 12) + answers.heightIn;
 	let BMI = 703 * (answers.weight / (height ^ 2));
 
-	//If BMI is in an unhealthy range
-	BMI < 18.5 || BMI > 25.9 ? riskVal += onePoint : riskVal += 0;
+	//Add a point if...
+	//BMI is in an unhealthy range
+	BMI < 18.5 || BMI > 25.9 ? riskVal += onePoint : null;
+	//They are a regular smoker
+	answers.smoking ? riskVal += onePoint : null;
+	//They have high cholesterol
+	answers.cholesterol ? riskVal += onePoint : null;
+	//They smoke regularly
+	!answers.smoking ? riskVal += onePoint : null;
+	//They do not get enough excercise
+	!answers.excercise ? riskVal += onePoint : null;
 
+	//Males contract heart disease at a rate rougly 41.5% more than Females.
+	answers.sex === "Male" ? riskVal = riskVal * 1.415 : null;
 }
 
 hideBackButton();
