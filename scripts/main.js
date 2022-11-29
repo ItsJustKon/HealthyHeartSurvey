@@ -4,7 +4,7 @@ let labelsList = document.getElementById("labelsList");
 let backButton = document.getElementById("backButton");
 let nextButton = document.getElementById("nextButton");
 let questionsList = document.getElementById("questions");
-let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "No" };
+let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
 let index = -1;
 let risk = 0;
 let BMI = 0;
@@ -12,10 +12,16 @@ let BMI = 0;
 async function recallValues() {
 	//Checks if a question has already been answered;
 	//If it has, update the answer field to have the saved answer.
-
-	if (Object.values(answers)[index] != "") {
-		questions.childNodes[0].value = Object.values(answers)[index];
+    answerindex = index
+    console.log(index)
+    if(index >= 2)
+    {
+        answerindex = index + 1
+    }
+	if (Object.values(answers)[answerindex] != "") {
+		questions.childNodes[0].value = Object.values(answers)[answerindex];
 		if (index === 2) {
+			questions.childNodes[0].value = answers["heightFt"];
 			questions.childNodes[1].value = answers["heightIn"];
 		}
 	}
@@ -96,6 +102,7 @@ function nextQuestion() {
 		
 		wipeQuestions();
 		updateQuestion();
+        recallValues();
 		revealBackButton();
 		
 		if (index === questionsList.children.length - 1) {
@@ -105,13 +112,14 @@ function nextQuestion() {
 }
 
 async function infoSubmit() {
+    storeValue(index)
 	console.log(answers);
 	let riskVal = 0;
 	let onePoint = 20;
 	
 	//Formula to calculate BMI
-	let height = (answers.heightFt * 12) + answers.heightIn;
-	BMI = 703 * (answers.weight / (height ^ 2));
+	let height = (answers.heightFt * 12) + parseInt(answers.heightIn);
+	BMI = 703 * (parseInt(answers.weight) / (height * height));
 
 	//Add a point if...
 	//BMI is in an unhealthy range
@@ -205,6 +213,7 @@ function displayResults()
         let newline = document.createElement('br')
         a.text = recomendationstext[i]
         a.href = recomendationslinks[i]
+        a.style = "color: green"
         document.getElementById("recomendations_list").appendChild(a)
         document.getElementById("recomendations_list").appendChild(newline)
     }
