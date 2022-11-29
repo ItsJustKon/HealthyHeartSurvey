@@ -4,9 +4,10 @@ let labelsList = document.getElementById("labelsList");
 let backButton = document.getElementById("backButton");
 let nextButton = document.getElementById("nextButton");
 let questionsList = document.getElementById("questions");
-let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
+let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "No" };
 let index = -1;
 let risk = 0;
+let BMI = 0;
 
 async function recallValues() {
 	//Checks if a question has already been answered;
@@ -110,7 +111,7 @@ async function infoSubmit() {
 	
 	//Formula to calculate BMI
 	let height = (answers.heightFt * 12) + answers.heightIn;
-	let BMI = 703 * (answers.weight / (height ^ 2));
+	BMI = 703 * (answers.weight / (height ^ 2));
 
 	//Add a point if...
 	//BMI is in an unhealthy range
@@ -123,10 +124,10 @@ async function infoSubmit() {
 	answers.cholesterol === "Yes" ? riskVal += onePoint : null;
 	console.log(`Risk Factor post Cholesterol: ${riskVal}`);
 	//They smoke regularly
-	!answers.smoking === "Yes" ? riskVal += onePoint : null;
-	console.log(`Risk Factor post Smoking: ${riskVal}`);
+	answers.diabetes === "Yes" ? riskVal += onePoint : null;
+	console.log(`Risk Factor post Diabetes: ${riskVal}`);
 	//They do not get enough excercise
-	!answers.excercise === "Yes" ? riskVal += onePoint : null;
+	answers.excercise === "No" ? riskVal += onePoint : null;
 	console.log(`Risk Factor post Excercise: ${riskVal}`);
 
 	//Males contract heart disease at a rate rougly 41.5% more than Females.
@@ -136,9 +137,10 @@ async function infoSubmit() {
 	
 	//Add 15% to risk factor for every 20 years of age.
 	let ageRisk = 0;
-	if (answers.age > 20) {
-		while (answers.age > 0) {
-			answers.age -= 20;
+    let age = answers.age
+	if (age > 20) {
+		while (age > 0) {
+			age -= 20;
 			ageRisk += 0.15;
 		}
 	}
@@ -147,6 +149,66 @@ async function infoSubmit() {
 	console.log(`Final Risk Value: ${riskVal}`);
 
 	risk = riskVal;
+    displayResults()
+}
+
+function displayResults()
+{
+    let recomendationstext = []
+    let recomendationslinks = []
+    document.getElementById("recomendations_list").innerHTML = ""
+    if(risk < 40)
+    {
+        document.getElementById("percentage").className = "green"
+        document.getElementById("RecomendationHeader").className = "green"
+        document.getElementById("RecomendationHeader").innerText = "You are healthy and have a low chance of getting heart diease"
+    }
+    else if(risk > 40 && risk < 130)
+    {
+        document.getElementById("percentage").className = "yellow"
+        document.getElementById("RecomendationHeader").className = "yellow"
+        document.getElementById("RecomendationHeader").innerText = "You are at a moderate risk of getting heart diease"
+    }
+    else if(risk > 130)
+    {
+        document.getElementById("percentage").className = "red"
+        document.getElementById("RecomendationHeader").className = "red"
+        document.getElementById("RecomendationHeader").innerText = "You are at a severe of getting heart diease"
+    }
+    document.getElementById("percentage_label").innerText = "The chance of you getting heart diease are:"
+    document.getElementById("percentage").innerText = risk+"%"
+    document.getElementById("RecomendationsLabel").innerText = "Recomendations:"
+    if(BMI < 18.5 || BMI > 25.9)
+    {
+        recomendationstext.push("•Try eating healthy")
+        recomendationslinks.push("https://www.heartandstroke.ca/healthy-living/healthy-eating/healthy-eating-basics")
+    }
+    if(answers.smoking === "Yes")
+    {
+        recomendationstext.push("•Stop smoking")
+        recomendationslinks.push("https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html")
+    }
+    if(answers.cholesterol === "Yes")
+    {
+        recomendationstext.push("•Lower your cholesterol")
+        recomendationslinks.push("https://www.mayoclinic.org/diseases-conditions/high-blood-cholesterol/in-depth/reduce-cholesterol/art-20045935")
+    }
+    if(answers.excercise === "No")
+    {
+        recomendationstext.push("•Try excercising rotuine")
+        recomendationslinks.push("https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/fitness/art-20048269#:~:text=Start%20slowly%20and%20build%20up,amount%20of%20time%20you%20exercise.")
+    }
+    console.log(recomendationstext)
+    for(let i = 0; i < recomendationstext.length;i++)
+    {
+        let a = document.createElement('a');
+        let newline = document.createElement('br')
+        a.text = recomendationstext[i]
+        a.href = recomendationslinks[i]
+        document.getElementById("recomendations_list").appendChild(a)
+        document.getElementById("recomendations_list").appendChild(newline)
+    }
+    
 }
 
 hideBackButton();
