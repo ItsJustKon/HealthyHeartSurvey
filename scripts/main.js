@@ -12,12 +12,12 @@ let BMI = 0;
 async function recallValues() {
 	//Checks if a question has already been answered;
 	//If it has, update the answer field to have the saved answer.
-    answerindex = index
-    console.log(index)
-    if(index >= 2)
-    {
-        answerindex = index + 1
-    }
+	let answerindex = index;
+	console.log(index);
+	if(index >= 2)
+	{
+		answerindex = index + 1;
+	}
 	if (Object.values(answers)[answerindex] != "") {
 		questions.childNodes[0].value = Object.values(answers)[answerindex];
 		if (index === 2) {
@@ -62,6 +62,25 @@ function wipeQuestions() {
 	labels.innerHTML = "";
 }
 
+function renderRisk() {
+	let recHead = document.getElementById("RecomendationHeader");
+	let percentage = document.getElementById("percentage");
+	
+	document.getElementById("recomendations_list").innerHTML = "";
+
+	if(risk < 40)
+	{
+		percentage.className = "green";
+		recHead.innerText = "You are healthy and have a low chance of getting heart diease";
+	} else if(risk > 40 && risk < 130) {
+		percentage.className = "yellow";
+		recHead.innerText = "You are at a moderate risk of getting heart diease";
+	} else if(risk > 130) {
+		percentage.className = "red";
+		recHead.innerText = "You are at a severe of getting heart diease";
+	}
+}
+
 function updateQuestion() {
 	//Gets one question from questions list based on the index.
 	//This prevents a lot of declarations at the top of the file.
@@ -76,7 +95,15 @@ function updateQuestion() {
 	labels.appendChild(labelsList.children[index].cloneNode(true));
 }
 
-
+function addAnchor(text, link) {
+	let a = document.createElement("a");
+	let newline = document.createElement("br");
+	a.text = text;
+	a.href = link;
+	a.className = "recAnchor";
+	document.getElementById("recomendations_list").appendChild(a);
+	document.getElementById("recomendations_list").appendChild(newline);
+}
 
 function backQuestion() {
 	if (index > 0) {
@@ -102,7 +129,7 @@ function nextQuestion() {
 		
 		wipeQuestions();
 		updateQuestion();
-        recallValues();
+		recallValues();
 		revealBackButton();
 		
 		if (index === questionsList.children.length - 1) {
@@ -112,7 +139,7 @@ function nextQuestion() {
 }
 
 async function infoSubmit() {
-    storeValue(index)
+	storeValue(index);
 	console.log(answers);
 	let riskVal = 0;
 	let onePoint = 20;
@@ -145,7 +172,7 @@ async function infoSubmit() {
 	
 	//Add 15% to risk factor for every 20 years of age.
 	let ageRisk = 0;
-    let age = answers.age
+	let age = answers.age;
 	if (age > 20) {
 		while (age > 0) {
 			age -= 20;
@@ -157,70 +184,47 @@ async function infoSubmit() {
 	console.log(`Final Risk Value: ${riskVal}`);
 
 	risk = riskVal;
-    displayResults()
+	displayResults();
 }
 
 function displayResults()
 {
-    let recomendationstext = []
-    let recomendationslinks = []
-    document.getElementById("recomendations_list").innerHTML = ""
-    if(risk < 40)
-    {
-        document.getElementById("percentage").className = "green"
-        document.getElementById("RecomendationHeader").className = "green"
-        document.getElementById("RecomendationHeader").innerText = "You are healthy and have a low chance of getting heart diease"
-    }
-    else if(risk > 40 && risk < 130)
-    {
-        document.getElementById("percentage").className = "yellow"
-        document.getElementById("RecomendationHeader").className = "yellow"
-        document.getElementById("RecomendationHeader").innerText = "You are at a moderate risk of getting heart diease"
-    }
-    else if(risk > 130)
-    {
-        document.getElementById("percentage").className = "red"
-        document.getElementById("RecomendationHeader").className = "red"
-        document.getElementById("RecomendationHeader").innerText = "You are at a severe of getting heart diease"
-    }
-    document.getElementById("percentage_label").innerText = "The chance of you getting heart diease are:"
-    document.getElementById("percentage").innerText = risk+"%"
-    document.getElementById("RecomendationsLabel").innerText = "Recomendations:"
-    if(BMI < 18.5 || BMI > 25.9)
-    {
-        recomendationstext.push("•Try eating healthy")
-        recomendationslinks.push("https://www.heartandstroke.ca/healthy-living/healthy-eating/healthy-eating-basics")
-    }
-    if(answers.smoking === "Yes")
-    {
-        recomendationstext.push("•Stop smoking")
-        recomendationslinks.push("https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html")
-    }
-    if(answers.cholesterol === "Yes")
-    {
-        recomendationstext.push("•Lower your cholesterol")
-        recomendationslinks.push("https://www.mayoclinic.org/diseases-conditions/high-blood-cholesterol/in-depth/reduce-cholesterol/art-20045935")
-    }
-    if(answers.excercise === "No")
-    {
-        recomendationstext.push("•Try excercising rotuine")
-        recomendationslinks.push("https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/fitness/art-20048269#:~:text=Start%20slowly%20and%20build%20up,amount%20of%20time%20you%20exercise.")
-    }
-    console.log(recomendationstext)
-    for(let i = 0; i < recomendationstext.length;i++)
-    {
-        let a = document.createElement('a');
-        let newline = document.createElement('br')
-        a.text = recomendationstext[i]
-        a.href = recomendationslinks[i]
-        a.style = "color: green"
-        document.getElementById("recomendations_list").appendChild(a)
-        document.getElementById("recomendations_list").appendChild(newline)
-    }
-    
+	renderRisk();
+
+	
+	document.getElementById("percentage_label").innerText = "Your heart disease risk factor is";
+	document.getElementById("RecomendationsLabel").innerText = "Recomendations:";
+	
+	let percentage = document.getElementById("percentage");
+	percentage.innerText = risk;
+
+	if(BMI < 18.5 || BMI > 25.9)
+	{
+		addAnchor("A basic plan on healthy eating",
+			"https://www.heartandstroke.ca/healthy-living/healthy-eating/healthy-eating-basics");
+	}
+
+	if(answers.smoking === "Yes")
+	{
+		addAnchor("Ways to help you quit smoking", 
+			"https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html");
+	}
+
+	if(answers.cholesterol === "Yes")
+	{
+		addAnchor("Try these things to lower your cholesterol", 
+			"https://www.mayoclinic.org/diseases-conditions/high-blood-cholesterol/in-depth/reduce-cholesterol/art-20045935");
+	}
+
+	if(answers.excercise === "No")
+	{ 
+		addAnchor("Try a beginner excercise routine", 
+			"https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/fitness/art-20048269#:~:text=Start%20slowly%20and%20build%20up,amount%20of%20time%20you%20exercise"); 
+	}
 }
 
 hideBackButton();
+
 backButton.addEventListener("click", backQuestion);
 nextButton.addEventListener("click", nextQuestion);
 
