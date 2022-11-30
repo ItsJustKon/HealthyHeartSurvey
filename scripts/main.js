@@ -1,9 +1,3 @@
-let questions = document.getElementById("currentQuestion");
-let labels = document.getElementById("currentLabel");
-let labelsList = document.getElementById("labelsList");
-let backButton = document.getElementById("backButton");
-let nextButton = document.getElementById("nextButton");
-let questionsList = document.getElementById("questions");
 let answers = { age: "", sex: "", heightFt: "", heightIn: "", weight: "", state: "", diabetes: "", smoking: "", cholesterol: "", excercise: "" };
 let index = -1;
 let risk = 0;
@@ -13,26 +7,25 @@ async function recallValues() {
 	//Checks if a question has already been answered;
 	//If it has, update the answer field to have the saved answer.
 	let answerindex = index;
-	console.log(index);
 	if(index >= 2)
 	{
 		answerindex = index + 1;
 	}
 	if (Object.values(answers)[answerindex] != "") {
-		questions.childNodes[0].value = Object.values(answers)[answerindex];
+		window.questions.childNodes[0].value = Object.values(answers)[answerindex];
 		if (index === 2) {
-			questions.childNodes[0].value = answers["heightFt"];
-			questions.childNodes[1].value = answers["heightIn"];
+			window.questions.childNodes[0].value = answers["heightFt"];
+			window.questions.childNodes[1].value = answers["heightIn"];
 		}
 	}
 }
 
 async function hideBackButton() {
-	backButton.style.opacity = 0;
+	window.backButton.style.opacity = 0;
 }
 
 async function revealBackButton() {
-	backButton.style.opacity = 1;
+	window.backButton.style.opacity = 1;
 }
 
 function storeValue(index) {
@@ -42,24 +35,24 @@ function storeValue(index) {
 			answers["heightIn"] = `${document.getElementById("inches").value}`;
 		}
 		else {
-			answers[questionsList.children[index].id] = document.getElementById(questionsList.children[index].id).value;
+			answers[window.questionsList.children[index].id] = document.getElementById(window.questionsList.children[index].id).value;
 		}
 	}
 }
 
 async function nextToSubmit() {
-	nextButton.innerHTML = "Submit";
-	nextButton.addEventListener("click", infoSubmit);
+	window.nextButton.innerHTML = "Submit";
+	window.nextButton.addEventListener("click", infoSubmit);
 }
 
 async function submitToNext() {
-	nextButton.innerHTML = "Next Question";
-	nextButton.removeEventListener("click", infoSubmit);
+	window.nextButton.innerHTML = "Next Question";
+	window.nextButton.removeEventListener("click", infoSubmit);
 }
 
 function wipeQuestions() {
-	questions.innerHTML = "";
-	labels.innerHTML = "";
+	window.questions.innerHTML = "";
+	window.labels.innerHTML = "";
 }
 
 function renderRisk() {
@@ -81,13 +74,13 @@ function updateQuestion() {
 	//This prevents a lot of declarations at the top of the file.
 	//We clone the node because if we don't, the element is deleted and cannot be used again.
 	if (index === 2) {
-		questions.appendChild(document.getElementById("feet").cloneNode(true));
-		questions.appendChild(document.getElementById("inches").cloneNode(true));
+		window.questions.appendChild(document.getElementById("feet").cloneNode(true));
+		window.questions.appendChild(document.getElementById("inches").cloneNode(true));
 	} else {
-		questions.appendChild(questionsList.children[index].cloneNode(true));
+		window.questions.appendChild(window.questionsList.children[index].cloneNode(true));
 	}
 
-	labels.appendChild(labelsList.children[index].cloneNode(true));
+	window.labels.appendChild(window.labelsList.children[index].cloneNode(true));
 }
 
 function addAnchor(text, link) {
@@ -117,7 +110,7 @@ function backQuestion() {
 }
 
 function nextQuestion() {
-	if (index < (questionsList.children.length - 1)) {
+	if (index < (window.questionsList.children.length - 1)) {
 		storeValue(index);
 
 		index++;
@@ -127,7 +120,7 @@ function nextQuestion() {
 		recallValues();
 		revealBackButton();
 		
-		if (index === questionsList.children.length - 1) {
+		if (index === window.questionsList.children.length - 1) {
 			nextToSubmit();
 		}
 	}
@@ -185,8 +178,8 @@ async function infoSubmit() {
 function displayResults()
 {
 	wipeQuestions();
-	backButton.remove();
-	nextButton.remove();
+	window.backButton.remove();
+	window.nextButton.remove();
 	renderRisk();
 
 	
@@ -222,10 +215,17 @@ function displayResults()
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+	window.questions = document.getElementById("currentQuestion");
+	window.labels = document.getElementById("currentLabel");
+	window.labelsList = document.getElementById("labelsList");
+	window.backButton = document.getElementById("backButton");
+	window.nextButton = document.getElementById("nextButton");
+	window.questionsList = document.getElementById("questions");
+	
 	hideBackButton();
 
-	backButton.addEventListener("click", backQuestion);
-	nextButton.addEventListener("click", nextQuestion);
-	
+	window.backButton.addEventListener("click", backQuestion);
+	window.nextButton.addEventListener("click", nextQuestion);
+
 	nextQuestion();
 });
