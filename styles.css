@@ -14,15 +14,15 @@ p {
     color: white;
 }
 
-.green
-{
-    color:#00e600 ;
+a {
+    color: white;
 }
-.yellow
-{
-    color:#ffdb4d ;
+
+
+#percentage_label {
+    color:white;
 }
-.red
-{
-    color:#e62e00 ;
+
+#percentage {
+    color: white;
 }
