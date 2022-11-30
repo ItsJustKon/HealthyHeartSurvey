@@ -187,7 +187,7 @@ function displayResults()
 	document.getElementById("RecomendationsLabel").innerText = "Recomendations:";
 	
 	let percentage = document.getElementById("percentage");
-	percentage.innerText = risk;
+	percentage.innerText = Math.ceil(risk);
 
 	if(BMI < 18.5 || BMI > 25.9)
 	{
