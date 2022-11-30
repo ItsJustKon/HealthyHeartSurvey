@@ -1,5 +1,10 @@
-.button:focus {
+button:focus {
     outline: none;
+}
+
+button:hover {
+    background-color: aquamarine;
+    cursor: pointer;
 }
 
 h1 {
@@ -56,19 +61,14 @@ a:hover {
     margin-right: auto;   
 }
 
-#quizContainer button {
+.questionButton {
     margin-right: 10px;
     margin-left: 10px;
     margin-top: 15px;
     border-radius: 4px;
-    width: 100px;
+    width: auto;
 }
 
 #quizContainer input {
     text-align: center;
-}
-
-#backButton {
-    margin-left: 30px;
-    margin-bottom: 15px;
 }
