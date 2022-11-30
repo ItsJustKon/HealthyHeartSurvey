@@ -155,7 +155,7 @@ async function infoSubmit() {
 	let ageRisk = 0;
 	let age = answers.age;
 	if (age > 20) {
-		while (age > 0) {
+		while (age >= 0) {
 			age -= 20;
 			ageRisk += 0.15;
 		}
@@ -170,6 +170,10 @@ async function infoSubmit() {
 
 function displayResults()
 {
+	const container = document.getElementById("resultsContainer");
+	container.style.marginTop = "50px";
+	container.style.opacity = "1";
+
 	wipeQuestions();
 	window.backButton.remove();
 	window.nextButton.remove();
