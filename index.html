@@ -15,26 +15,30 @@
 
 <body style="background-color: #181a1b">
 
-
-    <h2>Healthy Heart Survey</h2>
-    <p>Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
-    <p>Your data is not being stored or collected. Examine our code at https://github.com/ItsJustKon/HealthyHeartSurvey.</p>
-    <div id="results">
+    <!-- This is the header at the top of the website. -->
+    <div id="infoContainer">
+        <h2><span style="color: crimson;">Healthy Heart</span> Survey</h2>
+        <hr style="width: 75%; margin-left: auto; margin-right: auto; background-color: white">
+        <p>Welcome to the survey! Please answer all questions honestly and to the best of your ability.</p>
+        <p>Your data is not being stored or collected. Examine our code at 
+            <a href="https://github.com/ItsJustKon/HealthyHeartSurvey">https://github.com/ItsJustKon/HealthyHeartSurvey</a>.</p>
+    </div>
+    
+    <div id="resultsContainer">
         <div id="percentage_label"></div>
         <h1 id="percentage"></h1>
         <a id="RecomendationHeader"></a>
         <br>
         <a id="RecomendationsLabel" style="color: white;"></a>
         <div id="recomendations_list"></div>
-
     </div>
-    <!-- This div holds the question currently displayed. -->
-    <div id="currentLabel"></div>
-    <div id="currentQuestion"></div>
 
-    <div id="buttons">
-        <button id="backButton" style="margin-right:50px">Previous Question</button>
-        <button id="nextButton" style="margin-left:50px">Next Question</button>
+    <!-- This div holds the question currently displayed. -->
+    <div id="quizContainer">
+        <div id="currentLabel"></div>
+        <div id="currentQuestion"></div>
+        <button id="backButton">Last Question</button>
+        <button id="nextButton">Next Question</button>
     </div>
 
     <!-- Div to hold the questions we will use, never displayed. -->

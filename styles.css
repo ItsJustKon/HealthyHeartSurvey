@@ -18,6 +18,9 @@ a {
     color: white;
 }
 
+a:hover {
+    color: aquamarine;
+}
 
 #percentage_label {
     color:white;
@@ -25,4 +28,47 @@ a {
 
 #percentage {
     color: white;
+}
+
+#infoContainer {
+    border: 2px solid grey;
+}
+
+#infoContainer h2 {
+    text-align: center;
+    font-weight: 600;
+    font-size: 40px;
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#infoContainer p {
+    text-align: center;
+    margin-bottom: 6px;
+    margin-top: 10px;
+}
+
+#quizContainer {
+    text-align: center;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;   
+}
+
+#quizContainer button {
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    width: 100px;
+}
+
+#quizContainer input {
+    text-align: center;
+}
+
+#backButton {
+    margin-left: 30px;
+    margin-bottom: 15px;
 }
