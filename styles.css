@@ -22,10 +22,6 @@ button:hover {
     cursor: pointer;
 }
 
-input:focus {
-    outline: none;
-}
-
 select {
     border: none;
     outline: none;
@@ -62,6 +58,10 @@ a {
 
 a:hover {
     color: aquamarine;
+}
+
+.tnr {
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #percentage_label {
@@ -111,7 +111,13 @@ a:hover {
     border: none;
     border-bottom: 2px solid red;
     background-color: transparent;
+    caret-color: white;
+    color: white;
 }
+#quizContainer input:focus {
+    outline: none;
+}
+
 
 #currentLabel {
     font-family: Arial, Helvetica, sans-serif
