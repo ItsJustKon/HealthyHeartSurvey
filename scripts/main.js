@@ -188,26 +188,26 @@ function displayResults()
 
 	if(BMI < 18.5 || BMI > 25.9)
 	{
-		addAnchor("A basic plan on healthy eating",
-			"https://www.heartandstroke.ca/healthy-living/healthy-eating/healthy-eating-basics");
+		addAnchor("Be mindful of the way you eat.",
+			"https://www.cdc.gov/healthyweight/healthy_eating/index.html");
 	}
 
 	if(answers.smoking === "Yes")
 	{
-		addAnchor("Ways to help you quit smoking", 
+		addAnchor("Cigarette addiction can be tough - but today could be the day you quit.", 
 			"https://www.cdc.gov/tobacco/campaign/tips/quit-smoking/index.html");
 	}
 
 	if(answers.cholesterol === "Yes")
 	{
-		addAnchor("Try these things to lower your cholesterol", 
+		addAnchor("Be mindful of your cholesterol levels.", 
 			"https://www.mayoclinic.org/diseases-conditions/high-blood-cholesterol/in-depth/reduce-cholesterol/art-20045935");
 	}
 
 	if(answers.excercise === "No")
 	{ 
-		addAnchor("Try a beginner excercise routine", 
-			"https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/fitness/art-20048269#:~:text=Start%20slowly%20and%20build%20up,amount%20of%20time%20you%20exercise"); 
+		addAnchor("Get Active! Activity has a huge impact on health.", 
+			"https://health.gov/moveyourway"); 
 	}
 }
 
