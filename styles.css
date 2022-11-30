@@ -64,6 +64,10 @@ a:hover {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+.recAnchor {
+    margin-bottom: 20px;
+}
+
 #percentage_label {
     color: white;
     margin-top: 0;
