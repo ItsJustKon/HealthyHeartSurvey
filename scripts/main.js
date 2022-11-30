@@ -63,21 +63,16 @@ function wipeQuestions() {
 }
 
 function renderRisk() {
-	let recHead = document.getElementById("RecomendationHeader");
-	let percentage = document.getElementById("percentage");
-	
+	let recHead = document.getElementById("RecomendationHeader");	
 	document.getElementById("recomendations_list").innerHTML = "";
 
 	if(risk < 40)
 	{
-		percentage.className = "green";
-		recHead.innerText = "You are healthy and have a low chance of getting heart diease";
+		recHead.innerText = "Congraulations! Your risk factor is very low.";
 	} else if(risk > 40 && risk < 130) {
-		percentage.className = "yellow";
-		recHead.innerText = "You are at a moderate risk of getting heart diease";
+		recHead.innerText = "Your risk factor is moderate - consider following some of the recommendations below.";
 	} else if(risk > 130) {
-		percentage.className = "red";
-		recHead.innerText = "You are at a severe of getting heart diease";
+		recHead.innerText = "Your risk factor is high! You are at high relative risk. Improve it by following some of the recommentations below.";
 	}
 }
 
@@ -189,6 +184,9 @@ async function infoSubmit() {
 
 function displayResults()
 {
+	wipeQuestions();
+	backButton.remove();
+	nextButton.remove();
 	renderRisk();
 
 	
