@@ -221,9 +221,11 @@ function displayResults()
 	}
 }
 
-hideBackButton();
+window.addEventListener("DOMContentLoaded", () => {
+	hideBackButton();
 
-backButton.addEventListener("click", backQuestion);
-nextButton.addEventListener("click", nextQuestion);
-
-nextQuestion();
+	backButton.addEventListener("click", backQuestion);
+	nextButton.addEventListener("click", nextQuestion);
+	
+	nextQuestion();
+});
