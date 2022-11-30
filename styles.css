@@ -1,10 +1,47 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+
 button:focus {
     outline: none;
 }
 
 button:hover {
-    background-color: aquamarine;
+    background-color: pink;
     cursor: pointer;
+}
+
+input:focus {
+    outline: none;
+}
+
+select {
+    border: none;
+    outline: none;
+    border-bottom: 2px solid red;
+    background-color: transparent;
+    border-radius: 2px;
+    color: white;
+}
+
+option {
+    text-align: center;
+    color: black;
+}
+
+option:hover {
+    background-color: blue;
 }
 
 h1 {
@@ -28,7 +65,7 @@ a:hover {
 }
 
 #percentage_label {
-    color:white;
+    color: white;
 }
 
 #percentage {
@@ -58,7 +95,7 @@ a:hover {
     text-align: center;
     width: 600px;
     margin-left: auto;
-    margin-right: auto;   
+    margin-right: auto;
 }
 
 .questionButton {
@@ -71,4 +108,11 @@ a:hover {
 
 #quizContainer input {
     text-align: center;
+    border: none;
+    border-bottom: 2px solid red;
+    background-color: transparent;
+}
+
+#currentLabel {
+    font-family: Arial, Helvetica, sans-serif
 }
