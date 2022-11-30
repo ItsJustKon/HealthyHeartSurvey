@@ -20,10 +20,6 @@ async function recallValues() {
 	}
 }
 
-async function hideBackButton() {
-	window.backButton.style.opacity = 0;
-}
-
 async function revealBackButton() {
 	window.backButton.style.opacity = 1;
 }
@@ -103,9 +99,6 @@ function backQuestion() {
 		updateQuestion();
 		recallValues();
 		submitToNext();
-		if (index === 0) {
-			hideBackButton();
-		}
 	}
 }
 
@@ -222,8 +215,6 @@ window.addEventListener("DOMContentLoaded", () => {
 	window.nextButton = document.getElementById("nextButton");
 	window.questionsList = document.getElementById("questions");
 	
-	hideBackButton();
-
 	window.backButton.addEventListener("click", backQuestion);
 	window.nextButton.addEventListener("click", nextQuestion);
 
