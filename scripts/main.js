@@ -56,13 +56,15 @@ function renderRisk() {
 	document.getElementById("recomendations_list").innerHTML = "";
     if (risk == 0) {
         recHead.innerText = "Amazing! Your risk factor is as low as it can be! 🥳";
-    } else if(risk < 40) {
+    } else if (risk < 40) {
 		recHead.innerText = "Congraulations! Your risk factor is very low.";
-	} else if(risk > 40 && risk < 130) {
+	} else if (risk > 40 && risk < 130) {
 		recHead.innerText = "Your risk factor is moderate - consider following some of the recommendations below.";
-	} else if(risk > 130) {
+	} else if (risk > 130 && Math.ceil(risk + 1) < 270) {
 		recHead.innerText = "Your risk factor is high! You are at high relative risk. Improve it by following some of the recommentations below.";
-	}
+	} else {
+        recHead.innerText = "You have the MAXIMUM possible risk factor. Congrats on your 100th birthday!";
+    }
 }
 
 function updateQuestion() {
@@ -121,7 +123,6 @@ function nextQuestion() {
 
 async function infoSubmit() {
 	storeValue(index);
-	console.log(answers);
 	let riskVal = 0;
 	let onePoint = 20;
 	
@@ -132,37 +133,30 @@ async function infoSubmit() {
 	//Add a point if...
 	//BMI is in an unhealthy range
 	BMI < 18.5 || BMI > 25.9 ? riskVal += onePoint : null;
-	console.log(`Risk Factor post BMI: ${riskVal}`);
 	//They are a regular smoker
 	answers.smoking === "Yes" ? riskVal += onePoint : null;
-	console.log(`Risk Factor post Smoking: ${riskVal}`);
 	//They have high cholesterol
 	answers.cholesterol === "Yes" ? riskVal += onePoint : null;
-	console.log(`Risk Factor post Cholesterol: ${riskVal}`);
 	//They smoke regularly
 	answers.diabetes === "Yes" ? riskVal += onePoint : null;
-	console.log(`Risk Factor post Diabetes: ${riskVal}`);
 	//They do not get enough excercise
 	answers.excercise === "No" ? riskVal += onePoint : null;
-	console.log(`Risk Factor post Excercise: ${riskVal}`);
 
 	//Males contract heart disease at a rate rougly 41.5% more than Females.
 	answers.sex === "Male" ? riskVal = riskVal * 1.415 : null;
-	console.log(`Risk Factor post Sex: ${riskVal}`);
 
 	
 	//Add 15% to risk factor for every 20 years of age.
 	let ageRisk = 0;
 	let age = answers.age;
-	if (age > 20) {
+	if (age > 20 && age < 101) {
 		while (age >= 0) {
 			age -= 20;
 			ageRisk += 0.15;
 		}
 	}
-	console.log(`Age Risk: ${ageRisk}`);
+
 	riskVal = riskVal * (1 + ageRisk);
-	console.log(`Final Risk Value: ${riskVal}`);
 
 	risk = riskVal;
 	displayResults();
@@ -188,8 +182,11 @@ function displayResults()
 	
 
     let percentage = document.getElementById("percentage");
-    percentage.innerText = Math.ceil(risk) + " / 248";
-
+    if (Math.ceil(risk + 1) == 270) {
+        percentage.innerText = Math.ceil(risk + 1) + " / 270";
+    } else {
+        percentage.innerText = risk + " / 270";
+    }
 
 	if(BMI < 18.5 || BMI > 25.9)
 	{
