@@ -54,9 +54,9 @@ function wipeQuestions() {
 function renderRisk() {
 	let recHead = document.getElementById("RecomendationHeader");	
 	document.getElementById("recomendations_list").innerHTML = "";
-
-	if(risk < 40)
-	{
+    if (risk == 0) {
+        recHead.innerText = "Amazing! Your risk factor is as low as it can be! 🥳";
+    } else if(risk < 40) {
 		recHead.innerText = "Congraulations! Your risk factor is very low.";
 	} else if(risk > 40 && risk < 130) {
 		recHead.innerText = "Your risk factor is moderate - consider following some of the recommendations below.";
@@ -181,10 +181,15 @@ function displayResults()
 
 	
 	document.getElementById("percentage_label").innerText = "Your heart disease risk factor is";
-	document.getElementById("RecomendationsLabel").innerText = "Recomendations:";
 	
-	let percentage = document.getElementById("percentage");
-	percentage.innerText = Math.ceil(risk) + " / 248";
+    if (risk != 0) {
+        document.getElementById("RecomendationsLabel").innerText = "Recomendations:";
+    }
+	
+
+    let percentage = document.getElementById("percentage");
+    percentage.innerText = Math.ceil(risk) + " / 248";
+
 
 	if(BMI < 18.5 || BMI > 25.9)
 	{
