@@ -185,7 +185,7 @@ function displayResults()
     if (Math.ceil(risk + 1) == 270) {
         percentage.innerText = Math.ceil(risk + 1) + " / 270";
     } else {
-        percentage.innerText = risk + " / 270";
+        percentage.innerText = Math.ceil(risk) + " / 270";
     }
 
 	if(BMI < 18.5 || BMI > 25.9)
